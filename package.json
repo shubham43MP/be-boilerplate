@@ -1,5 +1,5 @@
 {
-  "name": "web3-backend",
+  "name": "backend-template",
   "scripts": {
     "dev": "nodemon",
     "lint": "eslint . --ext .ts && prettier --check .",

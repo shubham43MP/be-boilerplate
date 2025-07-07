@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import logger from './utils/logger';
 import { Request, Response, NextFunction } from 'express';
+import healthRouter from './routes/health.route';
 
 const app = express();
 
@@ -15,10 +16,7 @@ app.use((req, _res, next) => {
 });
 
 // Health check route
-app.get('/', (_req, res) => {
-  logger.info('Health check route hit');
-  res.send('✅ Web3 Signature Verification API is running');
-});
+app.get('/', healthRouter);
 
 // ❌ Error handler (always last)
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
