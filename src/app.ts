@@ -1,0 +1,29 @@
+import express from 'express';
+import cors from 'cors';
+import logger from './utils/logger';
+import { Request, Response, NextFunction } from 'express';
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// ✅ Request logger middleware
+app.use((req, _res, next) => {
+  logger.info(`${req.method} ${req.originalUrl}`);
+  next();
+});
+
+// Health check route
+app.get('/', (_req, res) => {
+  logger.info('Health check route hit');
+  res.send('✅ Web3 Signature Verification API is running');
+});
+
+// ❌ Error handler (always last)
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  logger.error(err.stack || err.message);
+  res.status(500).json({ message: 'Something went wrong' });
+});
+
+export default app;
