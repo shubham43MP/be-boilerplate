@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { Service } from '../services/health.service';
+import { HealthService } from '../services/health.service';
 
-export class Controller {
-  private service = new Service();
-
-  handleHealthController = (req: Request, res: Response) => {
-    this.service.handleHealthService(req, res);
+export class HealthController {
+  static handleHealthController = (req: Request, res: Response) => {
+    HealthService.handleHealthService(req, res);
   };
 }
